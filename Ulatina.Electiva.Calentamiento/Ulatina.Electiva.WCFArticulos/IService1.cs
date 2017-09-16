@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Drawing;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
@@ -10,11 +11,13 @@ namespace Ulatina.Electiva.WCFArticulos
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IService1" in both code and config file together.
     [ServiceContract]
-    public interface IService1
+    public interface IArticulosPerdidos
     {
+        [OperationContract]
+        int IngresarArticuloPerdido(ArticuloPerdido elArticulo);
 
         [OperationContract]
-        string GetData(int value);
+        string GetData(int elValor);
 
         [OperationContract]
         CompositeType GetDataUsingDataContract(CompositeType composite);
@@ -22,6 +25,25 @@ namespace Ulatina.Electiva.WCFArticulos
         // TODO: Add your service operations here
     }
 
+    [DataContract]
+    public class ArticuloPerdido
+    {
+        public DateTime FechaIngreso;
+        public String UbicacionDondeSeEncontro;
+        public DateTime FechaDeHallazgo;
+        public MiColor color;
+        public String Senas;
+        public String Marca;
+    }
+    [DataContract]
+    public enum MiColor
+    {
+        Verde = 1,
+        Azul = 2,
+        Negro = 3,
+        Blanco = 4,
+        Amarillo = 5
+    }
 
     // Use a data contract as illustrated in the sample below to add composite types to service operations.
     [DataContract]
